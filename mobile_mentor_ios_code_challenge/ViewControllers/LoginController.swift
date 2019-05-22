@@ -18,7 +18,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         UIElementSizes.navigationBarMaxY += navigationController!.navigationBar.frame.maxY
         
-        //setupUserAccounts()
+        setupUserAccounts()
+        print(UserAccounts.userAccountEmail)
+        print(UserAccounts.userPasswords)
     
         setupView()
         
@@ -37,17 +39,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     fileprivate func setupUserAccounts() {
         
-        let defaultUsers = ["jane.smith@email.com", "john.doe@email.com"]
-        let defaultUserPasswords = ["test1234%^&*", "*&^%4321tset"]
+        let defaultUsers = ["eli","jane.smith@email.com", "john.doe@email.com"]
+        let defaultUserPasswords = ["eli","test1234%^&*", "*&^%4321tset"]
         
         var userCount = 0
         
-//        repeat {
-//            UserAccountViewModel.userEmail = defaultUsers[userCount]
-//            UserAccountViewModel.userPassword = defaultUserPasswords[userCount]
-//            UserAccountViewModel().setUserDict()
-//            userCount = 1
-//        } while userCount < defaultUsers.count
+        repeat {
+            UserAccountViewModel.userEmail = defaultUsers[userCount]
+            UserAccountViewModel.userPassword = defaultUserPasswords[userCount]
+            UserAccountViewModel().setUserDict()
+            userCount += 1
+        } while userCount < defaultUsers.count
         
     }
     
@@ -57,9 +59,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         mainView.passwordTextField.delegate = self
         mainView.passwordTextField.isSecureTextEntry = true
         
-        // let dismissKeyboardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        // dismissKeyboardTapGestureRecognizer.cancelsTouchesInView = false
-        // mainView.addGestureRecognizer(dismissKeyboardTapGestureRecognizer)
+        mainView.loginButton.addTarget(self, action: #selector(handleLoginButtonTap(sender:)), for: .touchUpInside)
+        
+        let dismissKeyboardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        dismissKeyboardTapGestureRecognizer.cancelsTouchesInView = false
+        mainView.addGestureRecognizer(dismissKeyboardTapGestureRecognizer)
         view = mainView
         
     }
@@ -69,7 +73,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func handleLoginButtonTap(sender: UIButton) {
-        
+        print("login pressed")
         guard let emailAddress = mainView.emailTextField.text?.lowercased(),
             let password = mainView.passwordTextField.text else { return }
         
@@ -79,7 +83,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
             comparePassword(password: password, savedPassword: savedPassword)
         } else {
             let alertController = CreateAlertController().withNoActions(title: "User Account Not Found", message: "The user account that you are attempting to use does not exist.")
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Canel", style: .cancel, handler: {(action: UIAlertAction!) in
+                self.mainView.emailTextField.text = ""
+                self.mainView.emailTextField.becomeFirstResponder()
+            }))
             present(alertController, animated: true) {
                 self.mainView.passwordTextField.text = ""
             }
@@ -89,7 +96,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     fileprivate func getUser(emailAddress: String) -> Int? {
         var dictKey: Int?
         for item in UserAccounts.userAccountEmail {
-            if item.value == emailAddress {
+            if item.value.lowercased() == emailAddress.lowercased() {
                 dictKey = item.key
             }
         }
@@ -99,6 +106,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
     fileprivate func comparePassword(password: String, savedPassword: String) {
         if password == savedPassword {
             print("User Login Successful. Navigate to SearchController")
+            let searchVC = SearchViewController()
+            searchVC.currentUser = getUser(emailAddress: self.mainView.emailTextField.text!)
+            self.navigationController?.pushViewController(searchVC, animated: true)
+
         } else {
             let alertController = CreateAlertController().withCancelAction(title: "Incorrect Password", message: "Please re-enter your password and try again.")
             

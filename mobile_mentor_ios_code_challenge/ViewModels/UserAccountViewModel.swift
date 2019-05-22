@@ -15,10 +15,14 @@ struct UserAccountViewModel {
     static var userPassword: String?
     
     func setUserDict() {
+        //creates a user with a user ID corresponding to their position in the userAccountEmail
         let userID = UserAccounts.userAccountEmail.count > 0 ? UserAccounts.userAccountEmail.count : 0
         
-        UserAccounts.userAccountEmail[userID] = UserAccountViewModel.userEmail
-        UserAccounts.userPasswords[userID] = UserAccountViewModel.userPassword
+        UserAccounts.userAccountEmail[userID] = UserAccountViewModel.userEmail?.lowercased()
+        UserAccounts.userPasswords[userID] = UserAccountViewModel.userPassword?.lowercased()
+        
+        ///so if i wanted to add someone to this, I would make an instnace of useracount view model, set the username
+        // and password, and call set user dict,which places them in the dictionary
     }
     
     func getUserID(forEmailAddress email: String) -> Int {
