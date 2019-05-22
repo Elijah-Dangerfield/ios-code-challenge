@@ -56,6 +56,4 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         currentUser = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
-
-
 }
