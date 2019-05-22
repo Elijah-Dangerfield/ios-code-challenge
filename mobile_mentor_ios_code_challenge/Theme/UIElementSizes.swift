@@ -17,6 +17,7 @@ struct UIElementSizes {
     static var labelWidth: CGFloat = UIScreen.main.bounds.width - 50
     
     static var textFieldWidth: CGFloat = UIScreen.main.bounds.width - 50
+
     static var singleLineTextFieldHeight: CGFloat = 50
     static var multilineTextFieldHeight: CGFloat = 200
     

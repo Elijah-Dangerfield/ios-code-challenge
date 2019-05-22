@@ -10,19 +10,21 @@ import UIKit
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
-    let mainView: MainView = { return MainView() }()
+    lazy var mainView: MainView = { return MainView() }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         UIElementSizes.navigationBarMaxY += navigationController!.navigationBar.frame.maxY
         
-        setupUserAccounts()
-        
+        //setupUserAccounts()
+    
         setupView()
         
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -40,25 +42,26 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         var userCount = 0
         
-        repeat {
-            UserAccountViewModel.userEmail = defaultUsers[userCount]
-            UserAccountViewModel.userPassword = defaultUserPasswords[userCount]
-            UserAccountViewModel().setUserDict()
-            userCount = 1
-        } while userCount < defaultUsers.count
+//        repeat {
+//            UserAccountViewModel.userEmail = defaultUsers[userCount]
+//            UserAccountViewModel.userPassword = defaultUserPasswords[userCount]
+//            UserAccountViewModel().setUserDict()
+//            userCount = 1
+//        } while userCount < defaultUsers.count
         
     }
     
     fileprivate func setupView() {
+        
         mainView.emailTextField.delegate = self
         mainView.passwordTextField.delegate = self
         mainView.passwordTextField.isSecureTextEntry = true
-
-        let dismissKeyboardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        dismissKeyboardTapGestureRecognizer.cancelsTouchesInView = false
-        mainView.addGestureRecognizer(dismissKeyboardTapGestureRecognizer)
         
-        view.addSubview(mainView)
+        // let dismissKeyboardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        // dismissKeyboardTapGestureRecognizer.cancelsTouchesInView = false
+        // mainView.addGestureRecognizer(dismissKeyboardTapGestureRecognizer)
+        view = mainView
+        
     }
     
     @objc fileprivate func dismissKeyboard() {

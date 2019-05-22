@@ -13,7 +13,7 @@
 		362E80D6221386F200EEED0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362E80D4221386F200EEED0D /* LaunchScreen.storyboard */; };
 		362E811C221390D700EEED0D /* UIElementSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E811B221390D700EEED0D /* UIElementSizes.swift */; };
 		362E811E221390E500EEED0D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E811D221390E500EEED0D /* UIColor.swift */; };
-		362E81202213910900EEED0D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E811F2213910900EEED0D /* LoginView.swift */; };
+		362E81202213910900EEED0D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E811F2213910900EEED0D /* MainView.swift */; };
 		362E81242213915F00EEED0D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E81232213915F00EEED0D /* LoginController.swift */; };
 		362E813622139A3A00EEED0D /* UserAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E813522139A3A00EEED0D /* UserAccountModel.swift */; };
 		362E813822139A5A00EEED0D /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E813722139A5A00EEED0D /* Constraints.swift */; };
@@ -29,7 +29,7 @@
 		362E80D7221386F200EEED0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		362E811B221390D700EEED0D /* UIElementSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementSizes.swift; sourceTree = "<group>"; };
 		362E811D221390E500EEED0D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		362E811F2213910900EEED0D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		362E811F2213910900EEED0D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		362E81232213915F00EEED0D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		362E813522139A3A00EEED0D /* UserAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountModel.swift; sourceTree = "<group>"; };
 		362E813722139A5A00EEED0D /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		362E810B22138F5200EEED0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				362E811F2213910900EEED0D /* LoginView.swift */,
+				362E811F2213910900EEED0D /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				362E813822139A5A00EEED0D /* Constraints.swift in Sources */,
-				362E81202213910900EEED0D /* LoginView.swift in Sources */,
+				362E81202213910900EEED0D /* MainView.swift in Sources */,
 				362E811E221390E500EEED0D /* UIColor.swift in Sources */,
 				362E81242213915F00EEED0D /* LoginController.swift in Sources */,
 				362E813C22139A8600EEED0D /* CreateAlertController.swift in Sources */,
