@@ -41,6 +41,14 @@ class SearchView: UIView {
         return barButtonItem
     }()
     
+    var seachHistoryTableView: UITableView = {
+        let tv = UITableView(frame: .zero, style: .plain)
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.backgroundColor = .lightGray
+        return tv
+    }()
+
+    
     
     var searchButton: UIButton = {
         let button = UIButton()
@@ -76,6 +84,7 @@ class SearchView: UIView {
         
         self.addSubview(searchTextField)
         self.addSubview(searchButton)
+        self.addSubview(seachHistoryTableView)
         
         setConstraints()
         

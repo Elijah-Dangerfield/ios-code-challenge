@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     lazy var searchView: SearchView = { return SearchView() }()
     
@@ -30,6 +30,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.leftBarButtonItem = searchView.backButton
         searchView.backButton.target = self
         searchView.backButton.action = #selector(handleBackButtonTap)
+        
+        searchView.seachHistoryTableView.delegate = self
+        searchView.seachHistoryTableView.register(CustomTableViewHeader.self, forHeaderFooterViewReuseIdentifier: self.headerId)
+        searchView.seachHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: self.cellId)
+
 
         
         searchView.searchTextField.delegate = self
@@ -58,6 +63,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             }
             return
         }
+        
+        //passed validation, use seach term
+        SearchHistoryViewModel.searchedTerms?.append(searchTerm)
     }
     
     
@@ -66,4 +74,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         currentUser = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    
 }
+
+
