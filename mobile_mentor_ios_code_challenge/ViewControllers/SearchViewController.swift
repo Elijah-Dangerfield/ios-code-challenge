@@ -48,6 +48,16 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     @objc func handleSearchButtonTap(sender: UIButton) {
         print("search pressed, handle this")
+        
+        guard let searchTerm = self.searchView.searchTextField.text, !searchTerm.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else{
+            let alertController = CreateAlertController().withCancelAction(title: "Invalid Search", message: "Please enter a valid search term and try again.")
+        
+            present(alertController, animated: true) {
+                self.searchView.searchTextField.text = ""
+                self.searchView.searchTextField.becomeFirstResponder()
+            }
+            return
+        }
     }
     
     
