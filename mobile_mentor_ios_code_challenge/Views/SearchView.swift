@@ -44,7 +44,8 @@ class SearchView: UIView {
     var seachHistoryTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.backgroundColor = .lightGray
+        tv.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
+
         return tv
     }()
 
@@ -88,6 +89,13 @@ class SearchView: UIView {
         
         setConstraints()
         
+        seachHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor).isActive = true
+        seachHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        seachHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        seachHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+
+        
     }
     
 
@@ -97,6 +105,7 @@ class SearchView: UIView {
         Constraints().constraintWithTopAndCenterXAnchor(field: searchTextField, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: UIElementSizes.navigationBarMaxY, centerXAnchor: centerXAnchor, centerXConstant: 0)
         
         Constraints().constraintWithTopAndCenterXAnchor(field: searchButton, width: UIElementSizes.buttonWidth, height: UIElementSizes.buttonHeight, topAnchor: searchTextField.bottomAnchor, topConstant: 25, centerXAnchor: centerXAnchor, centerXConstant: 0)
+    
         
     }
     

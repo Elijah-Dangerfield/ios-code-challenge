@@ -23,6 +23,7 @@
 		5A9E62402295C07F004D3AA4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E623F2295C07F004D3AA4 /* SearchView.swift */; };
 		5A9E62422295D436004D3AA4 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E62412295D436004D3AA4 /* SearchHistoryViewModel.swift */; };
 		5A9E62442295DEEF004D3AA4 /* SearchTermCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E62432295DEEF004D3AA4 /* SearchTermCell.swift */; };
+		5A9E62462295E0EE004D3AA4 /* SearchTermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E62452295E0EE004D3AA4 /* SearchTermViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		5A9E623F2295C07F004D3AA4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		5A9E62412295D436004D3AA4 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		5A9E62432295DEEF004D3AA4 /* SearchTermCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTermCell.swift; sourceTree = "<group>"; };
+		5A9E62452295E0EE004D3AA4 /* SearchTermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTermViewModel.swift; sourceTree = "<group>"; };
 		82276A9ED03023C60BA659B6 /* Pods_mobile_mentor_ios_code_challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mobile_mentor_ios_code_challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22030297DB94B07604D2E34 /* Pods-mobile_mentor_ios_code_challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobile_mentor_ios_code_challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mobile_mentor_ios_code_challenge/Pods-mobile_mentor_ios_code_challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		F5C57F35E623F66622826977 /* Pods-mobile_mentor_ios_code_challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobile_mentor_ios_code_challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-mobile_mentor_ios_code_challenge/Pods-mobile_mentor_ios_code_challenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				3673F78C22147F870045435E /* UserAccountViewModel.swift */,
 				5A9E62412295D436004D3AA4 /* SearchHistoryViewModel.swift */,
+				5A9E62452295E0EE004D3AA4 /* SearchTermViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				5A9E62442295DEEF004D3AA4 /* SearchTermCell.swift in Sources */,
 				362E813822139A5A00EEED0D /* Constraints.swift in Sources */,
 				362E81202213910900EEED0D /* MainView.swift in Sources */,
+				5A9E62462295E0EE004D3AA4 /* SearchTermViewModel.swift in Sources */,
 				362E811E221390E500EEED0D /* UIColor.swift in Sources */,
 				362E81242213915F00EEED0D /* LoginController.swift in Sources */,
 				362E813C22139A8600EEED0D /* CreateAlertController.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SeachTermCell: UIView {
+class SearchTermCell: UITableViewCell {
     
     var searchTermLable: UILabel = {
         let textField = UILabel()
@@ -50,11 +50,9 @@ class SeachTermCell: UIView {
     
    
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: "search_term_cell")
         setupView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,7 +66,7 @@ class SeachTermCell: UIView {
         
         backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
         
-        self.addSubview(timeStampLable)
+        //self.addSubview(timeStampLable)
         self.addSubview(searchTermLable)
         
         setConstraints()

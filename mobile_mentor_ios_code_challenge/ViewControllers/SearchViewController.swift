@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITextFieldDelegate  {
 
     lazy var searchView: SearchView = { return SearchView() }()
     
@@ -31,12 +31,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         searchView.backButton.target = self
         searchView.backButton.action = #selector(handleBackButtonTap)
         
-        searchView.seachHistoryTableView.delegate = self
-        searchView.seachHistoryTableView.register(CustomTableViewHeader.self, forHeaderFooterViewReuseIdentifier: self.headerId)
-        searchView.seachHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: self.cellId)
 
-
-        
         searchView.searchTextField.delegate = self
         searchView.searchButton.addTarget(self, action: #selector(handleSearchButtonTap(sender:)), for: .touchUpInside)
 
@@ -74,6 +69,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         currentUser = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    
+
     
     
 }
