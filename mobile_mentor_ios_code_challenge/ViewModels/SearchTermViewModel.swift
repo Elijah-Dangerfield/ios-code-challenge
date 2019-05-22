@@ -9,7 +9,7 @@
 import Foundation
 struct SearchTermViewModel {
     
-    var seachTerm: String
-    var timeStamp: String
+    var searchTerm: String
+
     
 }

@@ -10,6 +10,6 @@ import Foundation
 
 struct SearchHistoryViewModel {
     
-    static var searchedTerms: [String]?
+    static var searchedTerms = [SearchTermViewModel]()
     
 }

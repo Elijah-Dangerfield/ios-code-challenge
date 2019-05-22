@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate  {
+class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource  {
 
     lazy var searchView: SearchView = { return SearchView() }()
     
@@ -31,6 +31,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate  {
         searchView.backButton.target = self
         searchView.backButton.action = #selector(handleBackButtonTap)
         
+        searchView.searchHistoryTableView.dataSource = self
+        searchView.searchHistoryTableView.register(UITableViewCell.self, forCellReuseIdentifier: "search_term_cell")
 
         searchView.searchTextField.delegate = self
         searchView.searchButton.addTarget(self, action: #selector(handleSearchButtonTap(sender:)), for: .touchUpInside)
@@ -60,7 +62,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate  {
         }
         
         //passed validation, use seach term
-        SearchHistoryViewModel.searchedTerms?.append(searchTerm)
+        let term = SearchTermViewModel(searchTerm: searchTerm)
+        SearchHistoryViewModel.searchedTerms.append(term)
+        searchView.searchHistoryTableView.reloadData()
+        searchView.searchHistoryTableView.isHidden = false
+        
     }
     
     
@@ -69,6 +75,19 @@ class SearchViewController: UIViewController, UITextFieldDelegate  {
         currentUser = nil
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return SearchHistoryViewModel.searchedTerms.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "search_term_cell", for: indexPath)
+        cell.textLabel?.text = SearchHistoryViewModel.searchedTerms[indexPath.row].searchTerm
+        cell.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
+        cell.textLabel?.textColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
+        return cell
+    }
+    
     
     
 

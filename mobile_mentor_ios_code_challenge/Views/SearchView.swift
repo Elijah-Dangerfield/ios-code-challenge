@@ -41,11 +41,11 @@ class SearchView: UIView {
         return barButtonItem
     }()
     
-    var seachHistoryTableView: UITableView = {
+    var searchHistoryTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
-
+        tv.isHidden = true
         return tv
     }()
 
@@ -85,14 +85,14 @@ class SearchView: UIView {
         
         self.addSubview(searchTextField)
         self.addSubview(searchButton)
-        self.addSubview(seachHistoryTableView)
+        self.addSubview(searchHistoryTableView)
         
         setConstraints()
         
-        seachHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor).isActive = true
-        seachHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        seachHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        seachHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        searchHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor).isActive = true
+        searchHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        searchHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        searchHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
 
         
