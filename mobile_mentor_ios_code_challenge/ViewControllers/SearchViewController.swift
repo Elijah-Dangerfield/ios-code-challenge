@@ -58,7 +58,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
      @objc func handleClearButtonTap() {
         print("Clear Button Tapped")
         SearchHistoryViewModel.searchedTerms = [SearchTermViewModel]()
-        searchView.searchHistoryTableView.reloadData()
         searchView.searchHistoryTableView.isHidden = true
     }
     
@@ -80,7 +79,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         let timeStamp = getTimeStamp()
         let term = SearchTermViewModel(searchTerm: searchTerm, timeStamp: timeStamp.description)
         SearchHistoryViewModel.searchedTerms.append(term)
-        searchView.searchHistoryTableView.reloadData()
+        DispatchQueue.main.async {
+            self.searchView.searchHistoryTableView.reloadData()
+        }
         searchView.searchHistoryTableView.isHidden = false
         
     }
