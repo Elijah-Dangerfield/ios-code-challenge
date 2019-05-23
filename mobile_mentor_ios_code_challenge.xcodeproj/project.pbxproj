@@ -19,6 +19,7 @@
 		362E813822139A5A00EEED0D /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E813722139A5A00EEED0D /* Constraints.swift */; };
 		362E813C22139A8600EEED0D /* CreateAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E813B22139A8600EEED0D /* CreateAlertController.swift */; };
 		3673F78D22147F870045435E /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3673F78C22147F870045435E /* UserAccountViewModel.swift */; };
+		5A1081492296DC8800A9F703 /* SearchHistoryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1081482296DC8800A9F703 /* SearchHistoryHeaderCell.swift */; };
 		5A9E623E2295BFE4004D3AA4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E623D2295BFE4004D3AA4 /* SearchViewController.swift */; };
 		5A9E62402295C07F004D3AA4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E623F2295C07F004D3AA4 /* SearchView.swift */; };
 		5A9E62422295D436004D3AA4 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E62412295D436004D3AA4 /* SearchHistoryViewModel.swift */; };
@@ -40,6 +41,7 @@
 		362E813722139A5A00EEED0D /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		362E813B22139A8600EEED0D /* CreateAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlertController.swift; sourceTree = "<group>"; };
 		3673F78C22147F870045435E /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
+		5A1081482296DC8800A9F703 /* SearchHistoryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderCell.swift; sourceTree = "<group>"; };
 		5A9E623D2295BFE4004D3AA4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5A9E623F2295C07F004D3AA4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		5A9E62412295D436004D3AA4 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				362E811F2213910900EEED0D /* MainView.swift */,
 				5A9E623F2295C07F004D3AA4 /* SearchView.swift */,
 				5A9E62432295DEEF004D3AA4 /* SearchTermCell.swift */,
+				5A1081482296DC8800A9F703 /* SearchHistoryHeaderCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				362E80CC221386EE00EEED0D /* AppDelegate.swift in Sources */,
 				362E813622139A3A00EEED0D /* UserAccountModel.swift in Sources */,
 				3673F78D22147F870045435E /* UserAccountViewModel.swift in Sources */,
+				5A1081492296DC8800A9F703 /* SearchHistoryHeaderCell.swift in Sources */,
 				362E811C221390D700EEED0D /* UIElementSizes.swift in Sources */,
 				5A9E62402295C07F004D3AA4 /* SearchView.swift in Sources */,
 				5A9E62422295D436004D3AA4 /* SearchHistoryViewModel.swift in Sources */,

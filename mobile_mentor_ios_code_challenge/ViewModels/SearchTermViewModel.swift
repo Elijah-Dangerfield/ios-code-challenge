@@ -10,6 +10,7 @@ import Foundation
 struct SearchTermViewModel {
     
     var searchTerm: String
+    var timeStamp: String
 
     
 }

@@ -32,7 +32,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         searchView.backButton.action = #selector(handleBackButtonTap)
         
         searchView.searchHistoryTableView.dataSource = self
-        searchView.searchHistoryTableView.register(UITableViewCell.self, forCellReuseIdentifier: "search_term_cell")
+        searchView.searchHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: "search_term_cell")
+        
+    
+        searchView.searchHistoryTableView.tableHeaderView = SearchHistoryHeaderCell()
+        
 
         searchView.searchTextField.delegate = self
         searchView.searchButton.addTarget(self, action: #selector(handleSearchButtonTap(sender:)), for: .touchUpInside)
@@ -62,14 +66,23 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         }
         
         //passed validation, use seach term
-        let term = SearchTermViewModel(searchTerm: searchTerm)
+        self.searchView.searchTextField.text = ""
+        let timeStamp = getTimeStamp()
+        let term = SearchTermViewModel(searchTerm: searchTerm, timeStamp: timeStamp.description)
         SearchHistoryViewModel.searchedTerms.append(term)
         searchView.searchHistoryTableView.reloadData()
         searchView.searchHistoryTableView.isHidden = false
         
     }
     
-    
+    func getTimeStamp() -> String{
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MM-dd-yyy HH:mm:ss"
+        
+        return formatter.string(from: now)
+    }
     @objc func handleBackButtonTap() {
         print("Back pressed")
         currentUser = nil
@@ -81,12 +94,17 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "search_term_cell", for: indexPath)
-        cell.textLabel?.text = SearchHistoryViewModel.searchedTerms[indexPath.row].searchTerm
-        cell.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
-        cell.textLabel?.textColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
+        let termItem = SearchHistoryViewModel.searchedTerms[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "search_term_cell", for: indexPath) as! SearchTermCell
+        
+        cell.searchTermLable.text = termItem.searchTerm
+        cell.timeStampLable.text = termItem.timeStamp
+
         return cell
     }
+    
+
+    
     
     
     

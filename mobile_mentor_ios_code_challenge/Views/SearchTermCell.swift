@@ -12,17 +12,9 @@ class SearchTermCell: UITableViewCell {
     
     var searchTermLable: UILabel = {
         let textField = UILabel()
-        textField.backgroundColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
-        textField.layer.borderColor = UIColor().HexToColor(hexString: "#2590E3", alpha: 1).cgColor
-        textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 25
-        textField.textAlignment = .center
-        textField.textColor = UIColor().HexToColor(hexString: "#FFFFFF", alpha: 1)
-        textField.font = UIFont(name: "AvenirNext-Regular", size: 20)
-        textField.layer.shadowColor = UIColor().HexToColor(hexString: "#000000", alpha: 1).cgColor
-        textField.layer.shadowRadius = 5
-        textField.layer.shadowOffset = CGSize(width: 0, height: 3)
-        textField.layer.shadowOpacity = 1
+        textField.textAlignment = .left
+        textField.textColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
+        textField.font = UIFont(name: "AvenirNext-Regular", size: 18)
         textField.layer.masksToBounds = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -31,17 +23,9 @@ class SearchTermCell: UITableViewCell {
     
     var timeStampLable: UILabel = {
         let textField = UILabel()
-        textField.backgroundColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
-        textField.layer.borderColor = UIColor().HexToColor(hexString: "#2590E3", alpha: 1).cgColor
-        textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 25
-        textField.textAlignment = .center
-        textField.textColor = UIColor().HexToColor(hexString: "#FFFFFF", alpha: 1)
-        textField.font = UIFont(name: "AvenirNext-Regular", size: 20)
-        textField.layer.shadowColor = UIColor().HexToColor(hexString: "#000000", alpha: 1).cgColor
-        textField.layer.shadowRadius = 5
-        textField.layer.shadowOffset = CGSize(width: 0, height: 3)
-        textField.layer.shadowOpacity = 1
+        textField.textAlignment = .right
+        textField.textColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
+        textField.font = UIFont(name: "AvenirNext-Regular", size: 18)
         textField.layer.masksToBounds = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -49,7 +33,6 @@ class SearchTermCell: UITableViewCell {
     }()
     
    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "search_term_cell")
         setupView()
@@ -66,8 +49,8 @@ class SearchTermCell: UITableViewCell {
         
         backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
         
-        //self.addSubview(timeStampLable)
-        self.addSubview(searchTermLable)
+        contentView.addSubview(timeStampLable)
+        contentView.addSubview(searchTermLable)
         
         setConstraints()
         
@@ -77,7 +60,14 @@ class SearchTermCell: UITableViewCell {
     
     fileprivate func setConstraints() {
         
-        Constraints().constraintWithTopAndCenterXAnchor(field: searchTermLable, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: 0, centerXAnchor: centerXAnchor, centerXConstant: 0)
+        let padding: CGFloat = 2.0
+        let centerConstantForLabel = (self.bounds.height - 30)/2
+        
+        Constraints().constraintWithTopAndLeadingAnchor(field: searchTermLable, width: UIElementSizes.cellLabelMaxWidth - padding ,height: UIElementSizes.cellLabelHeight ,topAnchor: self.topAnchor, topConstant: centerConstantForLabel, leadingAnchor: self.leadingAnchor, leadingConstant: padding)
+        
+         Constraints().constraintWithTopAndLeadingAnchor(field: timeStampLable, width: UIElementSizes.cellLabelMaxWidth - padding ,height: UIElementSizes.cellLabelHeight ,topAnchor: self.topAnchor, topConstant: centerConstantForLabel, leadingAnchor: searchTermLable.trailingAnchor, leadingConstant: -padding)
+        
+    
     }
     
 }

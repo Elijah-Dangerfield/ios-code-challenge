@@ -45,6 +45,7 @@ class SearchView: UIView {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
+        tv.rowHeight = UIElementSizes.tableViewRowHeight
         tv.isHidden = true
         return tv
     }()
@@ -89,7 +90,7 @@ class SearchView: UIView {
         
         setConstraints()
         
-        searchHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor).isActive = true
+        searchHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 25).isActive = true
         searchHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         searchHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         searchHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
