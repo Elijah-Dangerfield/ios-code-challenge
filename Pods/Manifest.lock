@@ -1,16 +1,20 @@
 PODS:
+  - Kingfisher (5.4.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
+  - Kingfisher (~> 5.0)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - Kingfisher
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Kingfisher: 9c8f2cc6710334e06f32ba2b45e77707d5e2f0c9
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 275078fa0f2d0ed3cf2665a7cb5fbbd0c2491334
+PODFILE CHECKSUM: 9ce5d52100daf5af9a76e855b0f344f70a359c35
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.1

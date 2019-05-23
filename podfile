@@ -7,4 +7,5 @@ target 'mobile_mentor_ios_code_challenge' do
 
   # Pods for mobile_mentor_ios_code_challenge
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'Kingfisher', '~> 5.0'
 end
