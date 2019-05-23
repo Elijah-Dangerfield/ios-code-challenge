@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate  {
+class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate  {
     
     lazy var resultsView: ResultsView = { return ResultsView() }()
     var list = [Album]()

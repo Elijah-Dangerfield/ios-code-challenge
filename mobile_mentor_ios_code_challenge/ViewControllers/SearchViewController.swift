@@ -131,7 +131,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
             DispatchQueue.main.async {
                 // let main thread handle UI related tasks
                 print(Thread.current)
-                let resultsVC = AlbumController()
+                let resultsVC = ResultsController()
                 resultsVC.searchTerm = search
                 self.navigationController?.pushViewController(resultsVC, animated: true)
             }
