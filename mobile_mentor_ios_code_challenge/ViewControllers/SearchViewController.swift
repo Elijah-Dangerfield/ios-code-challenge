@@ -115,10 +115,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let search = SearchHistoryViewModel.searchedTerms[indexPath.row].searchTerm
         print("searching for \(search)")
 
-        let resultsVC = ResultsController()
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem //
+        
+        let resultsVC = AlbumController()
         resultsVC.searchTerm = search
         self.navigationController?.pushViewController(resultsVC, animated: true)
 

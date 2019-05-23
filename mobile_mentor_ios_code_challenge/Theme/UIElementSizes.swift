@@ -17,7 +17,8 @@ struct UIElementSizes {
     static var labelWidth: CGFloat = UIScreen.main.bounds.width - 50
     
     static var cellLabelMaxWidth: CGFloat = UIScreen.main.bounds.width/2
-    static var tableViewRowHeight: CGFloat = 50
+    static var tableViewRowHeight_small: CGFloat = 50
+    static var tableViewRowHeight_large: CGFloat = 150
     static var cellLabelHeight: CGFloat = 30
     static var textFieldWidth: CGFloat = UIScreen.main.bounds.width - 50
 

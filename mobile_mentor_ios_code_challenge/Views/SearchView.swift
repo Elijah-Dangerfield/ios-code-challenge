@@ -45,7 +45,7 @@ class SearchView: UIView {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
-        tv.rowHeight = UIElementSizes.tableViewRowHeight
+        tv.rowHeight = UIElementSizes.tableViewRowHeight_small
         tv.isHidden = true
         return tv
     }()
