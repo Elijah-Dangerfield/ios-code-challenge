@@ -127,11 +127,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         //clears results and then makes call to api and updates results view model
         SearchResultsViewModel.results = [Album]()
         NetworkManager.instance.getAlbums(searchRequest: search) { (requestedAlbums) in
-            SearchResultsViewModel.results = requestedAlbums.sorted(by: {$0.collectionName < $1.collectionName})
+            SearchResultsViewModel.results = requestedAlbums
+            DispatchQueue.main.async {
+                // let main thread handle UI related tasks
+                print(Thread.current)
+                let resultsVC = AlbumController()
+                resultsVC.searchTerm = search
+                self.navigationController?.pushViewController(resultsVC, animated: true)
+            }
             
-            let resultsVC = AlbumController()
-            resultsVC.searchTerm = search
-            self.navigationController?.pushViewController(resultsVC, animated: true)
 
         }
         
