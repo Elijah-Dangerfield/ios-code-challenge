@@ -49,6 +49,7 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.list[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "results_cell", for: indexPath) as! ResultsTableViewCell
+        cell.selectionStyle = .none
         let url = URL(string: item.artworkUrl100)
         
         cell.albumTitleLabel.text = item.collectionName
@@ -62,8 +63,40 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-   
-        
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if self.list.count == 0 {
+            resultsView.resultsTableView.setEmptyMessage("No Results Found for \"\(searchTerm!)\"")
+        } else {
+            resultsView.resultsTableView.restore()
+        }
+        
+        return self.list.count
+    }
+    
+
+    
+}
+
+extension UITableView {
+    
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .white
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = .center;
+        messageLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 18)
+        messageLabel.sizeToFit()
+        
+        self.backgroundView = messageLabel;
+        self.separatorStyle = .none;
+    }
+    
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
+    }
 }

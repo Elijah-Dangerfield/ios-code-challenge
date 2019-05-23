@@ -479,14 +479,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 55474HTC9X;
+				DEVELOPMENT_TEAM = MSMDV43SUS;
 				INFOPLIST_FILE = mobile_mentor_ios_code_challenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobile-mentor.mobile-mentor-ios-code-challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dangerfield.mobile-mentor.mobile-mentor-ios-code-challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,14 +499,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 55474HTC9X;
+				DEVELOPMENT_TEAM = MSMDV43SUS;
 				INFOPLIST_FILE = mobile_mentor_ios_code_challenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobile-mentor.mobile-mentor-ios-code-challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dangerfield.mobile-mentor.mobile-mentor-ios-code-challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

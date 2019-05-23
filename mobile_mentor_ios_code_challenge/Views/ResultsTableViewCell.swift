@@ -9,6 +9,7 @@ import UIKit
 
 class ResultsTableViewCell: UITableViewCell {
     
+    
     var albumTitleLabel: UILabel = {
         let textField = UILabel()
         textField.textAlignment = .left
