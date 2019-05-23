@@ -9,7 +9,7 @@ import UIKit
 
 class ResultsTableViewCell: UITableViewCell {
     
-    var songTitleLabel: UILabel = {
+    var albumTitleLabel: UILabel = {
         let textField = UILabel()
         textField.textAlignment = .left
         textField.textColor = #colorLiteral(red: 0.1422091424, green: 0.5657446384, blue: 0.8896750212, alpha: 1)
@@ -21,16 +21,6 @@ class ResultsTableViewCell: UITableViewCell {
         return textField
     }()
     
-    var albumTitleLabel: UILabel = {
-        let textField = UILabel()
-        textField.textAlignment = .left
-        textField.textColor = UIColor().HexToColor(hexString: "#0463AC", alpha: 1)
-        textField.font = UIFont(name: "AvenirNext-Regular", size: 18)
-        textField.layer.masksToBounds = false
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
-    }()
     
     var artistTitleLabel: UILabel = {
         let textField = UILabel()
@@ -74,7 +64,6 @@ class ResultsTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
         containerView.addSubview(artistTitleLabel)
-        containerView.addSubview(songTitleLabel)
         containerView.addSubview(albumTitleLabel)
         contentView.addSubview(resultImageView)
         contentView.addSubview(containerView)
@@ -91,9 +80,7 @@ class ResultsTableViewCell: UITableViewCell {
         
     Constraints().constraintWithTopAndLeadingAnchor(field: containerView, width: UIElementSizes.cellLabelMaxWidth, height: 300, topAnchor: resultImageView.topAnchor, topConstant:  0, leadingAnchor: resultImageView.trailingAnchor, leadingConstant: 30)
         
-    Constraints().constraintWithTopAndLeadingAnchor(field: songTitleLabel, width: UIElementSizes.windowWidth - resultImageView.bounds.width - 50, height: 30, topAnchor: containerView.topAnchor, topConstant: 0, leadingAnchor: containerView.leadingAnchor, leadingConstant: 0)
-        
-    Constraints().constraintWithTopAndLeadingAnchor(field: albumTitleLabel, width: UIElementSizes.windowWidth - resultImageView.bounds.width - 50, height: 30, topAnchor: songTitleLabel.bottomAnchor, topConstant: 0, leadingAnchor: containerView.leadingAnchor, leadingConstant: 0)
+    Constraints().constraintWithTopAndLeadingAnchor(field: albumTitleLabel, width: UIElementSizes.windowWidth - resultImageView.bounds.width - 50, height: 30, topAnchor: containerView.topAnchor, topConstant: 0, leadingAnchor: containerView.leadingAnchor, leadingConstant: 0)
         
     Constraints().constraintWithTopAndLeadingAnchor(field: artistTitleLabel, width: UIElementSizes.windowWidth - resultImageView.bounds.width - 50, height: 30, topAnchor: albumTitleLabel.bottomAnchor, topConstant: 0, leadingAnchor: containerView.leadingAnchor, leadingConstant: 0)
         

@@ -8,11 +8,12 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
-class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate  {
+class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate  {
     
     lazy var resultsView: ResultsView = { return ResultsView() }()
-    var list = [ResultsViewModel]()
+    var list = [Album]()
     var searchTerm: String?
     
     override func viewDidLoad() {
@@ -31,16 +32,12 @@ class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSou
         //searchView.searchHistoryTableView.dataSource = self
         //searchView.searchHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: "search_term_cell")
         
-        let result = ResultsViewModel(artistTitle: "artist Title", albumTitle: "album title", songTitle: "Song title", albumImage: UIImage(named:"grapefruit-slice-332-332")!)
-        
-        for _ in 0...10{
-            list.append(result)
-        }
+        list = SearchResultsViewModel.results
         
         resultsView.resultsTableView.delegate = self
         resultsView.resultsTableView.dataSource = self
         resultsView.resultsTableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: "results_cell")
-    
+        
         view = resultsView
         
     }
@@ -48,17 +45,25 @@ class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.list.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.list[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "results_cell", for: indexPath) as! ResultsTableViewCell
-
-        cell.albumTitleLabel.text = item.albumTitle
-        cell.artistTitleLabel.text = item.artistTitle
-        cell.songTitleLabel.text = item.songTitle
-        cell.resultImageView.image = item.albumImage
+        let url = URL(string: item.artworkUrl100)
+        
+        cell.albumTitleLabel.text = item.collectionName
+        cell.artistTitleLabel.text = item.artistName
+        cell.resultImageView.kf.setImage(with: url)
         
         return cell
+    }
+    
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+   
+        
     }
     
 }
