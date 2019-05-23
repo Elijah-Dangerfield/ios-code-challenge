@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource  {
+class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate  {
 
     lazy var searchView: SearchView = { return SearchView() }()
     
@@ -25,6 +25,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     
     
     fileprivate func setupView() {
+        let headerView = SearchHistoryHeaderCell()
         
         self.title = UserAccounts.userAccountEmail[currentUser!]
         self.navigationItem.leftBarButtonItem = searchView.backButton
@@ -32,10 +33,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         searchView.backButton.action = #selector(handleBackButtonTap)
         
         searchView.searchHistoryTableView.dataSource = self
+        searchView.searchHistoryTableView.delegate = self
         searchView.searchHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: "search_term_cell")
         
     
-        searchView.searchHistoryTableView.tableHeaderView = SearchHistoryHeaderCell()
+        searchView.searchHistoryTableView.tableHeaderView = headerView
+        headerView.clearButton.addTarget(self, action: #selector(handleClearButtonTap), for: .touchUpInside)
         
 
         searchView.searchTextField.delegate = self
@@ -50,6 +53,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     
     @objc fileprivate func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+     @objc func handleClearButtonTap() {
+        print("Clear Button Tapped")
+        SearchHistoryViewModel.searchedTerms = [SearchTermViewModel]()
+        searchView.searchHistoryTableView.reloadData()
+        searchView.searchHistoryTableView.isHidden = true
     }
     
     @objc func handleSearchButtonTap(sender: UIButton) {
@@ -103,13 +113,16 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         return cell
     }
     
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let search = SearchHistoryViewModel.searchedTerms[indexPath.row].searchTerm
+        print("searching for \(search)")
 
-    
-    
-    
-    
+        let resultsVC = ResultsController()
+        resultsVC.searchTerm = search
+        self.navigationController?.pushViewController(resultsVC, animated: true)
 
-    
+    }
     
 }
 

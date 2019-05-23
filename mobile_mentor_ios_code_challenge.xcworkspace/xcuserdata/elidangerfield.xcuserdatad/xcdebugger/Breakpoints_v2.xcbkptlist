@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mobile_mentor_ios_code_challenge/ViewControllers/SearchViewController.swift"
-            timestampString = "580316804.066873"
+            timestampString = "580318360.760112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "setupView()"
             landmarkType = "7">
          </BreakpointContent>
