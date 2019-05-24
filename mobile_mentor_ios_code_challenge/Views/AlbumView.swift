@@ -55,7 +55,12 @@ class AlbumView: UIView {
         
         Constraints().constraintWithTopAndCenterXAnchor(field: albumArtImageView, width: 200, height: 200, topAnchor:topAnchor, topConstant: UIElementSizes.navigationBarMaxY + 75, centerXAnchor: centerXAnchor, centerXConstant: 0)
         
-        Constraints().constraintWithTopAndCenterXAnchor(field: songResultsTableView, width: UIElementSizes.windowWidth, height: UIElementSizes.windowHeight, topAnchor: albumArtImageView.bottomAnchor, topConstant: 25, centerXAnchor: centerXAnchor, centerXConstant: 0)
+        songResultsTableView.topAnchor.constraint(equalTo: albumArtImageView.bottomAnchor, constant: 25).isActive = true
+        songResultsTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        songResultsTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        songResultsTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+    
     }
     
 }

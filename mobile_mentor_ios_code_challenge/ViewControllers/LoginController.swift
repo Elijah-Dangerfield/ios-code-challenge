@@ -15,13 +15,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var debug = navigationController!.navigationBar.frame.maxY 
-        
         UIElementSizes.navigationBarMaxY = navigationController!.navigationBar.frame.maxY
         
         setupUserAccounts()
-        print(UserAccounts.userAccountEmail)
-        print(UserAccounts.userPasswords)
     
         setupView()
         
@@ -48,7 +44,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         repeat {
             UserAccountViewModel.userEmail = defaultUsers[userCount]
             UserAccountViewModel.userPassword = defaultUserPasswords[userCount]
-            UserAccountViewModel().setUserDict()
+            UserAccountViewModel.setUserDict()
             userCount += 1
         } while userCount < defaultUsers.count
         
@@ -75,11 +71,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @objc func handleLoginButtonTap(sender: UIButton) {
         print("login pressed")
-        guard let emailAddress = mainView.emailTextField.text?.lowercased(),
-            let password = mainView.passwordTextField.text else { return }
+        guard let emailAddress = mainView.emailTextField.text?.lowercased() else { return }
+            //not lowercased as passwords should be case sensitive for security
+        guard let password = mainView.passwordTextField.text else { return }
         
-        if let user = getUser(emailAddress: emailAddress) {
-            guard let savedPassword = UserAccounts.userPasswords[user] else { return }
+    
+        if let savedPassword = UserAccounts.users[emailAddress]{
             UserAccountViewModel.userEmail = emailAddress
             comparePassword(password: password, savedPassword: savedPassword)
         } else {
@@ -88,27 +85,24 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 self.mainView.emailTextField.text = ""
                 self.mainView.emailTextField.becomeFirstResponder()
             }))
+            alertController.addAction(UIAlertAction(title: "Create Account", style: .default, handler: {(action: UIAlertAction!) in
+                print("User is acreating a new account")
+                let createAccountVC = CreateAccountController()
+                createAccountVC.emailAddress = self.mainView.emailTextField.text
+                self.navigationController?.pushViewController(createAccountVC, animated: true)
+            }))
             present(alertController, animated: true) {
                 self.mainView.passwordTextField.text = ""
             }
         }
     }
     
-    fileprivate func getUser(emailAddress: String) -> Int? {
-        var dictKey: Int?
-        for item in UserAccounts.userAccountEmail {
-            if item.value.lowercased() == emailAddress.lowercased() {
-                dictKey = item.key
-            }
-        }
-        return dictKey
-    }
     
     fileprivate func comparePassword(password: String, savedPassword: String) {
         if password == savedPassword {
             print("User Login Successful. Navigate to SearchController")
             let searchVC = SearchViewController()
-            searchVC.currentUser = getUser(emailAddress: self.mainView.emailTextField.text!)
+            searchVC.currentUser = self.mainView.emailTextField.text?.lowercased()
             self.navigationController?.pushViewController(searchVC, animated: true)
 
         } else {
@@ -125,5 +119,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+
     
 }

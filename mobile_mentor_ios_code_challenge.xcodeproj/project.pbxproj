@@ -36,6 +36,9 @@
 		5AA1A7BD2297ADD300DCD87D /* AlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7BC2297ADD300DCD87D /* AlbumController.swift */; };
 		5AA1A7BF2297B40600DCD87D /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7BE2297B40600DCD87D /* AlbumView.swift */; };
 		5AA1A7C12297B4B900DCD87D /* SongsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7C02297B4B900DCD87D /* SongsTableViewCell.swift */; };
+		5AA1A7C322984C6D00DCD87D /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7C222984C6D00DCD87D /* CreateAccountView.swift */; };
+		5AA1A7C522984DA400DCD87D /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7C422984DA400DCD87D /* CreateAccountController.swift */; };
+		5AA1A7C72298563900DCD87D /* String+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1A7C62298563900DCD87D /* String+Extenstions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		5AA1A7BC2297ADD300DCD87D /* AlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumController.swift; sourceTree = "<group>"; };
 		5AA1A7BE2297B40600DCD87D /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		5AA1A7C02297B4B900DCD87D /* SongsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTableViewCell.swift; sourceTree = "<group>"; };
+		5AA1A7C222984C6D00DCD87D /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		5AA1A7C422984DA400DCD87D /* CreateAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountController.swift; sourceTree = "<group>"; };
+		5AA1A7C62298563900DCD87D /* String+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extenstions.swift"; sourceTree = "<group>"; };
 		82276A9ED03023C60BA659B6 /* Pods_mobile_mentor_ios_code_challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mobile_mentor_ios_code_challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22030297DB94B07604D2E34 /* Pods-mobile_mentor_ios_code_challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobile_mentor_ios_code_challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mobile_mentor_ios_code_challenge/Pods-mobile_mentor_ios_code_challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		F5C57F35E623F66622826977 /* Pods-mobile_mentor_ios_code_challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobile_mentor_ios_code_challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-mobile_mentor_ios_code_challenge/Pods-mobile_mentor_ios_code_challenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 				5A9E623D2295BFE4004D3AA4 /* SearchViewController.swift */,
 				5AA1A7B422971C6200DCD87D /* ResultsController.swift */,
 				5AA1A7BC2297ADD300DCD87D /* AlbumController.swift */,
+				5AA1A7C422984DA400DCD87D /* CreateAccountController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 				5A9E623F2295C07F004D3AA4 /* SearchView.swift */,
 				5A10814E2296F9F400A9F703 /* ResultsView.swift */,
 				5AA1A7BE2297B40600DCD87D /* AlbumView.swift */,
+				5AA1A7C222984C6D00DCD87D /* CreateAccountView.swift */,
 				5A9E62432295DEEF004D3AA4 /* SearchTermCell.swift */,
 				5A1081482296DC8800A9F703 /* SearchHistoryHeaderCell.swift */,
 				5A10814C2296F93700A9F703 /* ResultsTableViewCell.swift */,
@@ -184,6 +192,7 @@
 			children = (
 				362E813722139A5A00EEED0D /* Constraints.swift */,
 				362E813B22139A8600EEED0D /* CreateAlertController.swift */,
+				5AA1A7C62298563900DCD87D /* String+Extenstions.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -343,6 +352,7 @@
 				5AA1A7BB2297AC1100DCD87D /* SearchSongsResultsViewModel.swift in Sources */,
 				5A9E62462295E0EE004D3AA4 /* SearchTermViewModel.swift in Sources */,
 				362E811E221390E500EEED0D /* UIColor.swift in Sources */,
+				5AA1A7C522984DA400DCD87D /* CreateAccountController.swift in Sources */,
 				362E81242213915F00EEED0D /* LoginController.swift in Sources */,
 				5AA1A7C12297B4B900DCD87D /* SongsTableViewCell.swift in Sources */,
 				362E813C22139A8600EEED0D /* CreateAlertController.swift in Sources */,
@@ -350,11 +360,13 @@
 				5A10815A229712F100A9F703 /* SearchAlbumResultsViewModel.swift in Sources */,
 				362E80CC221386EE00EEED0D /* AppDelegate.swift in Sources */,
 				5AA1A7BD2297ADD300DCD87D /* AlbumController.swift in Sources */,
+				5AA1A7C72298563900DCD87D /* String+Extenstions.swift in Sources */,
 				5A10815822970F5100A9F703 /* NetworkManager.swift in Sources */,
 				362E813622139A3A00EEED0D /* UserAccountModel.swift in Sources */,
 				3673F78D22147F870045435E /* UserAccountViewModel.swift in Sources */,
 				5A1081492296DC8800A9F703 /* SearchHistoryHeaderCell.swift in Sources */,
 				5AA1A7B92297AA3400DCD87D /* Song.swift in Sources */,
+				5AA1A7C322984C6D00DCD87D /* CreateAccountView.swift in Sources */,
 				362E811C221390D700EEED0D /* UIElementSizes.swift in Sources */,
 				5A9E62402295C07F004D3AA4 /* SearchView.swift in Sources */,
 				5A1081512297022700A9F703 /* Album.swift in Sources */,

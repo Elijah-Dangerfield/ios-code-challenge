@@ -10,8 +10,7 @@ import Foundation
 
 struct UserAccounts {
     
-    static var userAccountEmail: [Int : String] = [:]
-    
-    static var userPasswords: [Int : String] = [:]
+    //maps email to password
+    static var users: [String : String] = [:]
     
 }

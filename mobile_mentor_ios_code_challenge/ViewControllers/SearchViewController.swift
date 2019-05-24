@@ -12,7 +12,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
 
     lazy var searchView: SearchView = { return SearchView() }()
     
-    var currentUser: Int?
+    var currentUser: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     fileprivate func setupView() {
         let headerView = SearchHistoryHeaderCell()
         
-        self.title = UserAccounts.userAccountEmail[currentUser!]
+        self.title = currentUser
         self.navigationItem.leftBarButtonItem = searchView.backButton
         searchView.backButton.target = self
         searchView.backButton.action = #selector(handleBackButtonTap)
@@ -63,12 +63,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         print("search pressed, handle this")
         
         guard let searchTerm = self.searchView.searchTextField.text, !searchTerm.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else{
-            let alertController = CreateAlertController().withCancelAction(title: "Invalid Search", message: "Please enter a valid search term and try again.")
-        
-            present(alertController, animated: true) {
-                self.searchView.searchTextField.text = ""
-                self.searchView.searchTextField.becomeFirstResponder()
-            }
+            CreateAlertController.showBasic(self, title: "Invalid Search", message: "Please enter a valid search term and try again")
             return
         }
         
