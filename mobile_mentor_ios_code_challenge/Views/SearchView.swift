@@ -103,7 +103,7 @@ class SearchView: UIView {
     
     fileprivate func setConstraints() {
         
-        Constraints().constraintWithTopAndCenterXAnchor(field: searchTextField, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: UIElementSizes.navigationBarMaxY, centerXAnchor: centerXAnchor, centerXConstant: 0)
+        Constraints().constraintWithTopAndCenterXAnchor(field: searchTextField, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: UIElementSizes.navigationBarMaxY + 75, centerXAnchor: centerXAnchor, centerXConstant: 0)
         
         Constraints().constraintWithTopAndCenterXAnchor(field: searchButton, width: UIElementSizes.buttonWidth, height: UIElementSizes.buttonHeight, topAnchor: searchTextField.bottomAnchor, topConstant: 25, centerXAnchor: centerXAnchor, centerXConstant: 0)
     

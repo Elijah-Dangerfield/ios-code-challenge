@@ -15,8 +15,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var debug = navigationController!.navigationBar.frame.maxY 
         
-        UIElementSizes.navigationBarMaxY += navigationController!.navigationBar.frame.maxY
+        UIElementSizes.navigationBarMaxY = navigationController!.navigationBar.frame.maxY
         
         setupUserAccounts()
         print(UserAccounts.userAccountEmail)

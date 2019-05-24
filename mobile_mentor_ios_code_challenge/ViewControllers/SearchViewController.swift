@@ -17,8 +17,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIElementSizes.navigationBarMaxY += navigationController!.navigationBar.frame.maxY
-
         setupView()
 
     }
