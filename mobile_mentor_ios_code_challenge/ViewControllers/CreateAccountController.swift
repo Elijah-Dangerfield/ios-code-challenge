@@ -111,7 +111,11 @@ class CreateAccountController: UIViewController {
         UserAccountViewModel.userPassword = password
         UserAccountViewModel.setUserDict()
         
-        print("Account Created, new users list is:", UserAccounts.users)
+        print("Account Created, for user ",email)
+        
+        let searchVC = SearchViewController()
+        searchVC.currentUser = email
+        self.navigationController?.pushViewController(searchVC, animated: true)
 
     }
     

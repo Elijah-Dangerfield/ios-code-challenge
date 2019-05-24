@@ -11,6 +11,15 @@ import UIKit
 class LoginController: UIViewController, UITextFieldDelegate {
     
     lazy var mainView: MainView = { return MainView() }()
+    
+    enum LoginError: Error {
+        case incompleteForm
+        case invalidEmail
+        case incorrectEmail
+        case incorrectPassword
+        case incorrectPasswordLength
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,16 +79,20 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func handleLoginButtonTap(sender: UIButton) {
-        print("login pressed")
-        guard let emailAddress = mainView.emailTextField.text?.lowercased() else { return }
-            //not lowercased as passwords should be case sensitive for security
-        guard let password = mainView.passwordTextField.text else { return }
+        print("User pressed login button")
         
-    
-        if let savedPassword = UserAccounts.users[emailAddress]{
-            UserAccountViewModel.userEmail = emailAddress
-            comparePassword(password: password, savedPassword: savedPassword)
-        } else {
+        do {
+            try login()
+            
+        } catch LoginError.incompleteForm {
+            CreateAlertController.showBasic(self,title: "Incomplete Form", message: "Please fill out email and both elipassword fields")
+        } catch LoginError.invalidEmail {
+            CreateAlertController.showBasic(self,title: "Invalid Email Format", message: "Please make sure you format your email correctly")
+        } catch LoginError.incorrectPasswordLength {
+            CreateAlertController.showBasic(self,title: "Password Too Short", message: "Password should be at least 6 characters")
+        } catch LoginError.incorrectPassword {
+            CreateAlertController.showBasic(self,title: "Incorrect Password", message: "Password does not match account")
+        } catch LoginError.incorrectEmail {
             let alertController = CreateAlertController().withNoActions(title: "User Account Not Found", message: "The user account that you are attempting to use does not exist.")
             alertController.addAction(UIAlertAction(title: "Canel", style: .cancel, handler: {(action: UIAlertAction!) in
                 self.mainView.emailTextField.text = ""
@@ -94,32 +107,49 @@ class LoginController: UIViewController, UITextFieldDelegate {
             present(alertController, animated: true) {
                 self.mainView.passwordTextField.text = ""
             }
+        } catch {
+            CreateAlertController.showBasic(self,title: "Unable To Login", message: "There was an error when attempting to login")
         }
     }
     
-    
-    fileprivate func comparePassword(password: String, savedPassword: String) {
-        if password == savedPassword {
-            print("User Login Successful. Navigate to SearchController")
-            let searchVC = SearchViewController()
-            searchVC.currentUser = self.mainView.emailTextField.text?.lowercased()
-            self.navigationController?.pushViewController(searchVC, animated: true)
-
-        } else {
-            let alertController = CreateAlertController().withCancelAction(title: "Incorrect Password", message: "Please re-enter your password and try again.")
-            
-            present(alertController, animated: true) {
-                self.mainView.passwordTextField.text = ""
-                self.mainView.passwordTextField.becomeFirstResponder()
-            }
-        }
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    func login() throws{
+        print("login pressed")
+        guard let emailAddress = mainView.emailTextField.text?.lowercased() else { return }
+        //not lowercased as passwords should be case sensitive for security
+        guard let password = mainView.passwordTextField.text else { return }
+        
+        if emailAddress.isEmpty || password.isEmpty  {
+            throw LoginError.incompleteForm
+        }
+        
+        if !emailAddress.isValidEmail {
+            throw LoginError.invalidEmail
+        }
+        
+        if password.count < 6 {
+            throw LoginError.incorrectPasswordLength
+        }
+        
+        guard let savedPassword = UserAccounts.users[emailAddress] else{
+            throw LoginError.incorrectEmail
+        }
+        
+        if(password != savedPassword){
+            throw LoginError.incorrectPassword
+        }
+        
+        
+        print("User found, login in ",emailAddress)
+        let searchVC = SearchViewController()
+        searchVC.currentUser = self.mainView.emailTextField.text?.lowercased()
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        
+    }
 
-    
 }
