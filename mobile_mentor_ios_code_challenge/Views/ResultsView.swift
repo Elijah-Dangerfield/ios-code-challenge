@@ -9,9 +9,7 @@
 import UIKit
 
 class ResultsView: UIView {
-    
- 
-    
+
     var resultsTableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -25,33 +23,23 @@ class ResultsView: UIView {
         super.init(frame: frame)
         
         setupView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setupView()
-        
     }
     
     fileprivate func setupView() {
-        
-        backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
-        
-        
-        self.addSubview(resultsTableView)
 
+        backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
+        self.addSubview(resultsTableView)
         setConstraints()
-    
     }
-    
-    
     
     fileprivate func setConstraints() {
-        
         Constraints().constraintWithTopAndCenterXAnchor(field: resultsTableView, width: UIElementSizes.windowWidth, height: UIElementSizes.windowHeight, topAnchor: topAnchor, topConstant: 0, centerXAnchor: centerXAnchor, centerXConstant: 0)
     }
-    
 }
 

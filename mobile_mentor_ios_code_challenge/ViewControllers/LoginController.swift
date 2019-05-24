@@ -20,18 +20,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         case incorrectPasswordLength
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UIElementSizes.navigationBarMaxY = navigationController!.navigationBar.frame.maxY
-        
         setupUserAccounts()
-    
         setupView()
-        
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,9 +40,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     fileprivate func setupUserAccounts() {
         
-        let defaultUsers = ["eli","jane.smith@email.com", "john.doe@email.com"]
-        let defaultUserPasswords = ["eli","test1234%^&*", "*&^%4321tset"]
-        
+        let defaultUsers = ["eli@eli.com","jane.smith@email.com", "john.doe@email.com"]
+        let defaultUserPasswords = ["password","test1234%^&*", "*&^%4321tset"]
         var userCount = 0
         
         repeat {
@@ -56,7 +50,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
             UserAccountViewModel.setUserDict()
             userCount += 1
         } while userCount < defaultUsers.count
-        
     }
     
     fileprivate func setupView() {
@@ -71,7 +64,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         dismissKeyboardTapGestureRecognizer.cancelsTouchesInView = false
         mainView.addGestureRecognizer(dismissKeyboardTapGestureRecognizer)
         view = mainView
-        
     }
     
     @objc fileprivate func dismissKeyboard() {
@@ -127,25 +119,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
         if emailAddress.isEmpty || password.isEmpty  {
             throw LoginError.incompleteForm
         }
-        
         if !emailAddress.isValidEmail {
             throw LoginError.invalidEmail
         }
-        
         if password.count < 6 {
             throw LoginError.incorrectPasswordLength
         }
-        
         guard let savedPassword = UserAccounts.users[emailAddress] else{
             throw LoginError.incorrectEmail
         }
-        
         if(password != savedPassword){
             throw LoginError.incorrectPassword
         }
-        
-        
-        print("User found, login in ",emailAddress)
+        print("User found, logging in ",emailAddress)
         let searchVC = SearchViewController()
         searchVC.currentUser = self.mainView.emailTextField.text?.lowercased()
         self.navigationController?.pushViewController(searchVC, animated: true)

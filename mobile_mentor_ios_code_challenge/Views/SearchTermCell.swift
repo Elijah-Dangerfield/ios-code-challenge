@@ -42,7 +42,6 @@ class SearchTermCell: UITableViewCell {
         super.init(coder: aDecoder)
         
         setupView()
-        
     }
     
     fileprivate func setupView() {
@@ -55,9 +54,7 @@ class SearchTermCell: UITableViewCell {
         setConstraints()
         
     }
-    
-    
-    
+  
     fileprivate func setConstraints() {
         
         let padding: CGFloat = 2.0
@@ -66,8 +63,6 @@ class SearchTermCell: UITableViewCell {
         Constraints().constraintWithTopAndLeadingAnchor(field: searchTermLable, width: UIElementSizes.cellLabelMaxWidth - padding ,height: UIElementSizes.cellLabelHeight ,topAnchor: self.topAnchor, topConstant: centerConstantForLabel, leadingAnchor: self.leadingAnchor, leadingConstant: padding)
         
          Constraints().constraintWithTopAndLeadingAnchor(field: timeStampLable, width: UIElementSizes.cellLabelMaxWidth - padding ,height: UIElementSizes.cellLabelHeight ,topAnchor: self.topAnchor, topConstant: centerConstantForLabel, leadingAnchor: searchTermLable.trailingAnchor, leadingConstant: -padding)
-        
-    
     }
     
 }

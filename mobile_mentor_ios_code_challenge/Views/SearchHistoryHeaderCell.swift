@@ -40,12 +40,10 @@ class SearchHistoryHeaderCell: UIView {
         setupView()
     }
 
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setupView()
-        
     }
     
     fileprivate func setupView() {
@@ -55,20 +53,14 @@ class SearchHistoryHeaderCell: UIView {
         self.addSubview(titleLabel)
         self.addSubview(clearButton)
 
-        
         setConstraints()
-        
     }
     
-    
-    
     fileprivate func setConstraints() {
-        
         
         Constraints().constraintWithCenterYAndCenterXAnchor(field: titleLabel, width: UIElementSizes.windowWidth/3, height: UIElementSizes.cellLabelHeight, centerYAnchor: centerYAnchor, centerYConstant: 0, centerXAnchor: centerXAnchor, centerXConstant: 0)
         
         Constraints().constraintWithCenterYAnchorAndTrailing(field: clearButton, width: 50, height: 50, centerYAnchor: centerYAnchor, centerYConstant: 0, trailingAnchor: trailingAnchor, trailingConstant: -12)
-        
     }
     
 }

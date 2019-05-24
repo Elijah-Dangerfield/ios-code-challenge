@@ -65,6 +65,8 @@ class NetworkManager{
                             // 0 element is album info
                             if songResults.index(of: song) != 0 {
                                 if let songInfo = song as? [String: AnyObject] {
+                                    print("PRINTING Song INFO \n\n\n")
+                                    print(songInfo, "\n\n\n")
                                     guard let songName = songInfo["trackName"] as? String else {return}
                                     guard let songNumber = songInfo["trackNumber"] as? Int else {return}
                                     let song = Song(songName: songName, songNumber: songNumber)

@@ -21,7 +21,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
 
     }
     
-    
     fileprivate func setupView() {
         let headerView = SearchHistoryHeaderCell()
         
@@ -55,7 +54,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     
      @objc func handleClearButtonTap() {
         print("Clear Button Tapped")
-        SearchHistoryViewModel.searchedTerms = [SearchTermViewModel]()
+        SearchHistoryModel.searchedTerms = [SearchTermViewModel]()
         searchView.searchHistoryTableView.isHidden = true
     }
     
@@ -71,7 +70,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         self.searchView.searchTextField.text = ""
         let timeStamp = getTimeStamp()
         let term = SearchTermViewModel(searchTerm: searchTerm, timeStamp: timeStamp.description)
-        SearchHistoryViewModel.searchedTerms.append(term)
+        SearchHistoryModel.searchedTerms.append(term)
         DispatchQueue.main.async {
             self.searchView.searchHistoryTableView.reloadData()
         }
@@ -94,11 +93,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchHistoryViewModel.searchedTerms.count
+        return SearchHistoryModel.searchedTerms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let termItem = SearchHistoryViewModel.searchedTerms[indexPath.row]
+        let termItem = SearchHistoryModel.searchedTerms[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "search_term_cell", for: indexPath) as! SearchTermCell
         
         cell.searchTermLable.text = termItem.searchTerm
@@ -110,7 +109,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let search = SearchHistoryViewModel.searchedTerms[indexPath.row].searchTerm
+        let search = SearchHistoryModel.searchedTerms[indexPath.row].searchTerm
         print("searching for \(search)")
 
         let backItem = UIBarButtonItem()
@@ -118,9 +117,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         navigationItem.backBarButtonItem = backItem //
         
         //clears results and then makes call to api and updates results view model
-        SearchAlbumResultsViewModel.results = [Album]()
+        SearchAlbumResultsModel.results = [Album]()
         NetworkManager.instance.getAlbums(searchRequest: search) { (requestedAlbums) in
-            SearchAlbumResultsViewModel.results = requestedAlbums
+            SearchAlbumResultsModel.results = requestedAlbums
             DispatchQueue.main.async {
                 // let main thread handle UI related tasks
                 print(Thread.current)

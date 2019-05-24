@@ -50,8 +50,6 @@ class SearchView: UIView {
         return tv
     }()
 
-    
-    
     var searchButton: UIButton = {
         let button = UIButton()
         button.setTitle("Search", for: .normal)
@@ -69,45 +67,35 @@ class SearchView: UIView {
         super.init(frame: frame)
         
         setupView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setupView()
-        
     }
     
     fileprivate func setupView() {
                 
         backgroundColor = UIColor().HexToColor(hexString: "#323F44", alpha: 1)
         
-        
         self.addSubview(searchTextField)
         self.addSubview(searchButton)
         self.addSubview(searchHistoryTableView)
         
         setConstraints()
-        
-        searchHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 25).isActive = true
-        searchHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        searchHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        searchHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-
-        
     }
-    
-
     
     fileprivate func setConstraints() {
         
         Constraints().constraintWithTopAndCenterXAnchor(field: searchTextField, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: UIElementSizes.navigationBarMaxY + 75, centerXAnchor: centerXAnchor, centerXConstant: 0)
         
         Constraints().constraintWithTopAndCenterXAnchor(field: searchButton, width: UIElementSizes.buttonWidth, height: UIElementSizes.buttonHeight, topAnchor: searchTextField.bottomAnchor, topConstant: 25, centerXAnchor: centerXAnchor, centerXConstant: 0)
-    
         
+        searchHistoryTableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 25).isActive = true
+        searchHistoryTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        searchHistoryTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        searchHistoryTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
 }

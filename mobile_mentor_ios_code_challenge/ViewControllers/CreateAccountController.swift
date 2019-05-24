@@ -20,14 +20,11 @@ class CreateAccountController: UIViewController {
         case incorrectPasswordLength
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,8 +38,6 @@ class CreateAccountController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
     
     fileprivate func setupView() {
         

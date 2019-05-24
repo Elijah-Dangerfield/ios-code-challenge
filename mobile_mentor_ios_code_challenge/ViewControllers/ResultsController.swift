@@ -37,11 +37,11 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchAlbumResultsViewModel.results.count
+        return SearchAlbumResultsModel.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = SearchAlbumResultsViewModel.results[indexPath.row]
+        let item = SearchAlbumResultsModel.results[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "results_cell", for: indexPath) as! ResultsTableViewCell
         cell.selectionStyle = .none
         let url = URL(string: item.artworkUrl100)
@@ -74,39 +74,39 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        if SearchAlbumResultsViewModel.results.count == 0 {
+        if SearchAlbumResultsModel.results.count == 0 {
             resultsView.resultsTableView.setEmptyMessage("No Results Found for \"\(searchTerm!)\"")
         } else {
             resultsView.resultsTableView.restore()
         }
         
-        return SearchAlbumResultsViewModel.results.count
+        return SearchAlbumResultsModel.results.count
     }
     
     @objc func handleAlbumTap(_ recognizer: UITapGestureRecognizer) {
   
-        let album = SearchAlbumResultsViewModel.results[recognizer.view!.tag]
+        let album = SearchAlbumResultsModel.results[recognizer.view!.tag]
         let collectionId = album.collectionId
         let url = album.artworkUrl100
         
         print("album clicked with colleciton id:",collectionId)
         
         NetworkManager.instance.getAlbumTracks(collectionId: collectionId) { (requestedTracks) in
-            SearchSongsResultsViewModel.results = requestedTracks
+            SearchSongsResultsModel.results = requestedTracks
             DispatchQueue.main.async {
                 let albumVC = AlbumController()
                 albumVC.albumName = album.collectionName
-                albumVC.albumName = album.collectionName
+                albumVC.artistName = album.artistName
+                albumVC.releaseDate = album.releaseDate
+                albumVC.genre = album.primaryGenreName
                 albumVC.albumImageUrl = URL(string: url)
                 self.navigationController?.pushViewController(albumVC, animated: true)
-                
             }
         }
     }
     
         
 }
-
 
 extension UITableView {
     

@@ -102,14 +102,12 @@ class CreateAccountView: UIView {
         super.init(frame: frame)
         
         setupView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setupView()
-        
     }
     
     fileprivate func setupView() {
@@ -128,10 +126,7 @@ class CreateAccountView: UIView {
         
     }
     
-
-    
     fileprivate func setConstraints() {
-        
         
         Constraints().constraintWithTopAndCenterXAnchor(field: emailTextField, width: UIElementSizes.textFieldWidth, height: 50, topAnchor: topAnchor, topConstant: UIElementSizes.navigationBarMaxY + 75, centerXAnchor: centerXAnchor, centerXConstant: 0)
         

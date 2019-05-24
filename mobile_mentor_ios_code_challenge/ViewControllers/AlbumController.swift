@@ -15,7 +15,9 @@ class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSou
     lazy var albumView: AlbumView = { return AlbumView() }()
     var albumName: String?
     var albumImageUrl: URL?
-    
+    var artistName: String?
+    var genre: String?
+    var releaseDate: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,25 +26,30 @@ class AlbumController: UIViewController, UITextFieldDelegate, UITableViewDataSou
         
     }
     
-    
     fileprivate func setupView() {
         
         self.title = self.albumName
-        albumView.albumArtImageView.kf.setImage(with: albumImageUrl)
+        
         albumView.songResultsTableView.dataSource = self
         albumView.songResultsTableView.delegate = self
         albumView.songResultsTableView.register(SongsTableViewCell.self, forCellReuseIdentifier: "song_cell")
+        
+        albumView.albumArtImageView.kf.setImage(with: albumImageUrl)
+        albumView.albumTitleLabel.text = self.albumName
+        albumView.artistNameLabel.text = self.artistName
+        albumView.genreYearLabel.text = "\(self.genre!)・\(self.releaseDate!)"
+
         
         self.view = albumView
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchSongsResultsViewModel.results.count
+        return SearchSongsResultsModel.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let song = SearchSongsResultsViewModel.results[indexPath.row]
+        let song = SearchSongsResultsModel.results[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "song_cell", for: indexPath) as! SongsTableViewCell
         cell.selectionStyle = .none
         cell.songTitleLabel.text = song.songName
