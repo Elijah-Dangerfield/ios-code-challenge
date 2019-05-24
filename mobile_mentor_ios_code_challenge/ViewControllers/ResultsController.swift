@@ -23,16 +23,11 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
         setupView()
         
     }
-    
-    
+
     fileprivate func setupView() {
         
         self.title = self.searchTerm
-        //searchView.searchHistoryTableView.dataSource = self
-        //searchView.searchHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: "search_term_cell")
-        
-        list = SearchAlbumResultsViewModel.results
-        
+  
         resultsView.resultsTableView.delegate = self
         resultsView.resultsTableView.dataSource = self
         resultsView.resultsTableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: "results_cell")
@@ -42,11 +37,11 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.list.count
+        return SearchAlbumResultsViewModel.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = self.list[indexPath.row]
+        let item = SearchAlbumResultsViewModel.results[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "results_cell", for: indexPath) as! ResultsTableViewCell
         cell.selectionStyle = .none
         let url = URL(string: item.artworkUrl100)
@@ -79,29 +74,30 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        if self.list.count == 0 {
+        if SearchAlbumResultsViewModel.results.count == 0 {
             resultsView.resultsTableView.setEmptyMessage("No Results Found for \"\(searchTerm!)\"")
         } else {
             resultsView.resultsTableView.restore()
         }
         
-        return self.list.count
+        return SearchAlbumResultsViewModel.results.count
     }
     
     @objc func handleAlbumTap(_ recognizer: UITapGestureRecognizer) {
   
-        recognizer.view?.doGlowAnimation(withColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
         let album = SearchAlbumResultsViewModel.results[recognizer.view!.tag]
         let collectionId = album.collectionId
+        let url = album.artworkUrl100
+        
         print("album clicked with colleciton id:",collectionId)
         
         NetworkManager.instance.getAlbumTracks(collectionId: collectionId) { (requestedTracks) in
             SearchSongsResultsViewModel.results = requestedTracks
-            print(requestedTracks)
             DispatchQueue.main.async {
-                
                 let albumVC = AlbumController()
                 albumVC.albumName = album.collectionName
+                albumVC.albumName = album.collectionName
+                albumVC.albumImageUrl = URL(string: url)
                 self.navigationController?.pushViewController(albumVC, animated: true)
                 
             }
@@ -130,29 +126,5 @@ extension UITableView {
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
-    }
-}
-
-extension UIView{
-    enum GlowEffect:Float{
-        case small = 0.4, normal = 1, big = 5
-    }
-    
-    func doGlowAnimation(withColor color:UIColor, withEffect effect:GlowEffect = .normal) {
-        layer.masksToBounds = false
-        layer.shadowColor = color.cgColor
-        layer.shadowRadius = 0
-        layer.shadowOpacity = effect.rawValue
-        layer.shadowOffset = .zero
-        
-        let glowAnimation = CABasicAnimation(keyPath: "shadowRadius")
-        glowAnimation.fromValue = 0
-        glowAnimation.toValue = 1
-        glowAnimation.beginTime = CACurrentMediaTime()+0.3
-        glowAnimation.duration = CFTimeInterval(0.3)
-        glowAnimation.fillMode = CAMediaTimingFillMode.removed
-        glowAnimation.autoreverses = true
-        glowAnimation.isRemovedOnCompletion = true
-        layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
     }
 }
