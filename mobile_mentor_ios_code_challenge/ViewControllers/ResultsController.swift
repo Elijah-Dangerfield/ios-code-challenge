@@ -16,11 +16,10 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
     var list = [Album]()
     var searchTerm: String?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIElementSizes.navigationBarMaxY += navigationController!.navigationBar.frame.maxY
-        
+                
         setupView()
         
     }
@@ -32,7 +31,7 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
         //searchView.searchHistoryTableView.dataSource = self
         //searchView.searchHistoryTableView.register(SearchTermCell.self, forCellReuseIdentifier: "search_term_cell")
         
-        list = SearchResultsViewModel.results
+        list = SearchAlbumResultsViewModel.results
         
         resultsView.resultsTableView.delegate = self
         resultsView.resultsTableView.dataSource = self
@@ -56,14 +55,27 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
         cell.artistTitleLabel.text = item.artistName
         cell.resultImageView.kf.setImage(with: url)
         
+        cell.artistTitleLabel.tag = indexPath.row
+        cell.artistTitleLabel.isUserInteractionEnabled = true
+        cell.artistTitleLabel.addGestureRecognizer(getGestureRecognizer())
+
+        cell.resultImageView.tag = indexPath.row
+        cell.resultImageView.isUserInteractionEnabled = true
+        cell.resultImageView.addGestureRecognizer(getGestureRecognizer())
+        
+        cell.albumTitleLabel.tag = indexPath.row
+        cell.albumTitleLabel.isUserInteractionEnabled = true
+        cell.albumTitleLabel.addGestureRecognizer(getGestureRecognizer())
+
         return cell
     }
     
-    // method to run when table view cell is tapped
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+    func getGestureRecognizer() -> UIGestureRecognizer{
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleAlbumTap(_:)))
+        tap.numberOfTapsRequired = 1
+        return tap
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -76,9 +88,29 @@ class ResultsController: UIViewController, UITextFieldDelegate, UITableViewDataS
         return self.list.count
     }
     
-
+    @objc func handleAlbumTap(_ recognizer: UITapGestureRecognizer) {
+  
+        recognizer.view?.doGlowAnimation(withColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+        let album = SearchAlbumResultsViewModel.results[recognizer.view!.tag]
+        let collectionId = album.collectionId
+        print("album clicked with colleciton id:",collectionId)
+        
+        NetworkManager.instance.getAlbumTracks(collectionId: collectionId) { (requestedTracks) in
+            SearchSongsResultsViewModel.results = requestedTracks
+            print(requestedTracks)
+            DispatchQueue.main.async {
+                
+                let albumVC = AlbumController()
+                albumVC.albumName = album.collectionName
+                self.navigationController?.pushViewController(albumVC, animated: true)
+                
+            }
+        }
+    }
     
+        
 }
+
 
 extension UITableView {
     
@@ -98,5 +130,29 @@ extension UITableView {
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
+    }
+}
+
+extension UIView{
+    enum GlowEffect:Float{
+        case small = 0.4, normal = 1, big = 5
+    }
+    
+    func doGlowAnimation(withColor color:UIColor, withEffect effect:GlowEffect = .normal) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowRadius = 0
+        layer.shadowOpacity = effect.rawValue
+        layer.shadowOffset = .zero
+        
+        let glowAnimation = CABasicAnimation(keyPath: "shadowRadius")
+        glowAnimation.fromValue = 0
+        glowAnimation.toValue = 1
+        glowAnimation.beginTime = CACurrentMediaTime()+0.3
+        glowAnimation.duration = CFTimeInterval(0.3)
+        glowAnimation.fillMode = CAMediaTimingFillMode.removed
+        glowAnimation.autoreverses = true
+        glowAnimation.isRemovedOnCompletion = true
+        layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
     }
 }

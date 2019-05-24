@@ -49,7 +49,38 @@ class NetworkManager{
                 print(error!.localizedDescription)
             }
             }.resume()
-        
-
+    }
+    
+    
+    func getAlbumTracks (collectionId: Int, completion: @escaping ([Song]) -> ()) {
+        var songs = [Song]()
+        let url = URL(string: "\(ALBUM_SONGS_URL)\(collectionId)")
+        let session = URLSession.shared
+        session.dataTask(with: url!) { (data, response, error) in
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    if let songResults = json["results"] as? NSArray {
+                        for song in songResults {
+                            // 0 element is album info
+                            if songResults.index(of: song) != 0 {
+                                if let songInfo = song as? [String: AnyObject] {
+                                    guard let songName = songInfo["trackName"] as? String else {return}
+                                    guard let songNumber = songInfo["trackNumber"] as? Int else {return}
+                                    let song = Song(songName: songName, songNumber: songNumber)
+                                    songs.append(song)
+                                }
+                            }
+                        }
+                        completion(songs)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+            }.resume()
     }
 }

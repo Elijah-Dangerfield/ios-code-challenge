@@ -123,9 +123,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         navigationItem.backBarButtonItem = backItem //
         
         //clears results and then makes call to api and updates results view model
-        SearchResultsViewModel.results = [Album]()
+        SearchAlbumResultsViewModel.results = [Album]()
         NetworkManager.instance.getAlbums(searchRequest: search) { (requestedAlbums) in
-            SearchResultsViewModel.results = requestedAlbums
+            SearchAlbumResultsViewModel.results = requestedAlbums
             DispatchQueue.main.async {
                 // let main thread handle UI related tasks
                 print(Thread.current)
@@ -134,7 +134,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
                 self.navigationController?.pushViewController(resultsVC, animated: true)
             }
             
-
         }
         
     }

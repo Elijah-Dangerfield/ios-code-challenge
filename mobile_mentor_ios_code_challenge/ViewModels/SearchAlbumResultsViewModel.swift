@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchResultsViewModel{
+struct SearchAlbumResultsViewModel{
     
     static var results = [Album]()
 }
